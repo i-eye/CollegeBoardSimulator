@@ -20,7 +20,7 @@ public class Main {
             System.out.println("Money: "+totalMoney);
             System.out.println("Students: "+ students);
             System.out.println("Points: "+ annoyancePoints);
-            int answer;
+            int answer = 0;
             double randomVal = Math.random();
             double[] gameSelection = {Math.random()*8,Math.random()*8, Math.random()*8};
             for(double x: gameSelection) {
@@ -33,7 +33,7 @@ public class Main {
                         if (students >= 2500) {
                             System.out.println("DINOSAUCE");
                         } else {
-                            System.out.println("Pay Colleges");
+                            System.out.println("Pay Colleges(" + (int) (randomVal * 230000 * difficulty) + ")");
                         }
                     }
                     case 5 -> System.out.println("Evade Taxes(or stop evading taxes");
@@ -42,13 +42,22 @@ public class Main {
                     case 8 -> System.out.println("Make the kids take their test at home(with technical difficulties");
                 }
             }
+            boolean needInput = true;
 
-            try{
-                answer = sc.nextInt();
-            } catch(Exception e){
-                System.out.println("CollegeBoard, are you really that bad at knowing what a number is?");
-                System.out.println("Ironic considering the difficulty of your tests");
-                answer = -1;
+            while(needInput) {
+                try {
+                    answer = sc.nextInt();
+                    if(answer == ((int)gameSelection[0]+1) || answer == ((int)gameSelection[1]+1) || answer == ((int)gameSelection[2]+1)){
+                        needInput = false;
+                    } else {
+                        System.out.println("Not an option, sorry");
+                    }
+
+                } catch (Exception e) {
+                    System.out.println("CollegeBoard, are you really that bad at knowing what a number is?");
+                    System.out.println("Ironic considering the difficulty of your tests");
+                    sc.nextLine();
+                }
             }
 
             switch (answer) {
