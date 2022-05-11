@@ -8,6 +8,7 @@ public class Main {
     static int students = 1000;
     static double difficulty = .1;
     static boolean taxEvasion = false;
+    static int highScore = 0;
 
     public static void main(String[] args) {
 
@@ -24,6 +25,11 @@ public class Main {
                 System.out.println("High school students everywhere thank you");
                 break;
             }
+            annoyancePoints = 500;
+            totalMoney = 1000000;
+            students = 1000;
+            difficulty = .1;
+            taxEvasion = false;
         }
 
     }
@@ -117,7 +123,11 @@ public class Main {
         if(students <= 0){
             System.out.println("You became so unpopular you couldn't make students pay for any more tests");
         }
+        if(annoyancePoints > highScore){
+            highScore = annoyancePoints;
+        }
         System.out.println("Your total points were "+ annoyancePoints);
+        System.out.println("Your highscore is "+ highScore);
     }
 
     public static void payColleges(double money){
@@ -136,15 +146,15 @@ public class Main {
     public static void payForTest(){
         System.out.println("Students pay for the test, you get some nice annoyance and money");
         System.out.println("Money gained: "+ (students * 120));
-        System.out.println("Points gained: "+ (students * 5));
+        System.out.println("Points gained: "+ (students * 2));
         totalMoney += students * 120;
-        annoyancePoints += students * 5;
+        annoyancePoints += students * 2;
     }
     public static void dinoSauce(){
         System.out.println("Dinosauce scourges reddit and many AP students get really annoyed");
         System.out.println("Students lost: "+(int)(students*.02*difficulty));
-        System.out.println("Points gained: "+ (int)(students*difficulty*100));
-        annoyancePoints += students * difficulty * 100;
+        System.out.println("Points gained: "+ (int)(students*difficulty*25));
+        annoyancePoints += students * difficulty * 25;
         students -= students*.1*difficulty;
     }
     public static void taxEvasion(){
@@ -174,8 +184,8 @@ public class Main {
         System.out.println("However, you still get money");
         System.out.println("Money gained: "+(students*120));
         System.out.println("Students lost: "+(int)(students*.01*difficulty));
-        System.out.println("Points gained: "+(students*20));
-        annoyancePoints += students* 20;
+        System.out.println("Points gained: "+(students*5*difficulty));
+        annoyancePoints += students * 5*difficulty;
         totalMoney += students * 120;
         students -= students*.01*difficulty;
     }
