@@ -1,4 +1,9 @@
-
+/*
+Ivan Freeman
+12 May 2022
+College Board Simulator
+Simulates you being College Board in a fun game
+ */
 import java.util.Scanner;
 import java.lang.Math;
 
@@ -6,7 +11,7 @@ public class Main {
     static int annoyancePoints = 500;
     static int totalMoney = 1000000;
     static int students = 1000;
-    static double difficulty = .1;
+    static double difficulty = .05;
     static boolean taxEvasion = false;
     static int highScore = 0;
 
@@ -18,6 +23,13 @@ public class Main {
         System.out.println("Take the money of the high school students");
         System.out.println("And don't lose all your money and/or students");
         System.out.println("Also try to annoy the students as much as possible");
+        System.out.println("Type in the number with the option");
+
+        try {
+            Thread.sleep(3500);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
 
         //loops the game if the play chooses too
         while(true){
@@ -33,7 +45,7 @@ public class Main {
             //insults the player if the inputs incorrectly
             catch(Exception e){
                 System.out.println("You literally had a "+ e + " at the very end of the game");
-                System.out.println("Shame on you");
+                System.out.println("I'm disappointed in you");
                 break;
             }
 
@@ -85,6 +97,8 @@ public class Main {
     }
 
     private static void endOfGameInfo() {
+
+        System.out.println("------------------------------------------");
         if(totalMoney <= 0){
             System.out.println("You ran out of money");
         }
@@ -94,23 +108,49 @@ public class Main {
         if(annoyancePoints > highScore){
             highScore = annoyancePoints;
         }
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         System.out.println("Your total points were "+ annoyancePoints);
         System.out.println("Your high score is "+ highScore);
     }
 
     private static boolean endOfRoundChanges() {
-        difficulty += .15;
+        difficulty += .075;
 
         System.out.println("Students are lost from graduation");
         students -= (int)(difficulty*25); // graduation
         if(taxEvasion){
-            System.out.println("Chance of being caught evading taxes: "+ (difficulty*.005*100)+ "%");
-            if(Math.random() < difficulty*.005){
+            if(Math.random() < difficulty*.0075){
+                System.out.println("------------------------------------------");
                 System.out.println("You got caught evading taxes by the IRS...");
+                System.out.println("Remember, there are only two guaranteed things in life");
+                try {
+                    Thread.sleep(500);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+                char[] deathAndTaxes = {'D','e','a','t','h',' ','a','n','d',' ','T','a','x','e','s'};
+                for(char x : deathAndTaxes){
+                    System.out.print(x);
+                    try {
+                        Thread.sleep(250);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+                System.out.println();
+
                 return true;
             }
+            System.out.print("Chance of being caught evading taxes: ");
+            double num = difficulty*.0075*100;
+            System.out.format("%.5f",num);
+            System.out.println("%");
         } else {
-            totalMoney -= (.075*totalMoney); // taxes
+            totalMoney -= (.175*totalMoney); // taxes
             System.out.println("Taxes are taken out");
         }
         return false;
@@ -126,13 +166,13 @@ public class Main {
                     needInput = false;
                 } else {
                     System.out.println("Not an option, sorry");
-                    System.out.println("Please enter a valid number");
+                    System.out.println("Please enter a valid number(type in the number of the option)");
                 }
 
             } catch (Exception e) {
                 System.out.println("CollegeBoard, are you really that bad at knowing what a number is?");
                 System.out.println("Ironic considering the difficulty of your tests");
-                System.out.println("Please enter a valid number");
+                System.out.println("Please enter a valid number(type in the number of the option)");
                 sc.nextLine();
             }
         }
@@ -160,6 +200,7 @@ public class Main {
     }
 
     private static void optionPrinter(double randomVal, double[] gameSelection) {
+        System.out.println("Options:");
         for(double x: gameSelection) {
             System.out.print(((int)x + 1) + ": ");
             switch ((int) x + 1) {
@@ -204,9 +245,11 @@ public class Main {
     //You have to pay for AP tests
     public static void payForTest(){
         System.out.println("Students pay for the test, you get some nice annoyance and money");
-        System.out.println("Money gained: "+ (students * 120));
+        System.out.println("Money gained: "+ (int)((students * 120)/difficulty));
+        System.out.println("Students lost: "+(int)(students*.005*difficulty));
         System.out.println("Points gained: "+ (students * 2));
-        totalMoney += students * 120;
+        totalMoney += (students * 120)/difficulty;
+        students -= students*.005*difficulty;
         annoyancePoints += students * 2;
     }
 
@@ -215,9 +258,9 @@ public class Main {
     public static void dinoSauce(){
         System.out.println("Dinosauce scourges reddit and many AP students get really annoyed");
         System.out.println("Students lost: "+(int)(students*.02*difficulty));
-        System.out.println("Points gained: "+ (int)(students*difficulty*25));
-        annoyancePoints += students * difficulty * 25;
-        students -= students*.1*difficulty;
+        System.out.println("Points gained: "+ (int)(students*difficulty*10));
+        annoyancePoints += students * difficulty * 10;
+        students -= students*.02*difficulty;
     }
 
     //This game has taxes, therefore it needs tax evasion too
@@ -234,10 +277,10 @@ public class Main {
     //The SAT costs money
     public static void satForcing(){
         System.out.println("The students don't hate the SAT too much");
-        System.out.println("But it's also cheaper");
-        System.out.println("Money gained: "+(students*90));
+        System.out.println("And it's cheaper");
+        System.out.println("Money gained: "+(int)((students*90)/difficulty));
         System.out.println("Points gained: "+(int)(students*difficulty*2.5));
-        totalMoney += students * 90;
+        totalMoney += (students * 90)/difficulty;
         annoyancePoints += students * difficulty * 2.5;
     }
 
@@ -252,13 +295,13 @@ public class Main {
 
     //at home AP tests were really unpopular since they were put together badly
     public static void atHomeTest(){
-        System.out.println("The at home test is annoying to many students, and it even makes some take IB classes instead");
+        System.out.println("The at home AP exams are annoying to many students, and they even make some take IB classes");
         System.out.println("However, you still get money");
-        System.out.println("Money gained: "+(students*120));
+        System.out.println("Money gained: "+(int)((students*120)/difficulty));
         System.out.println("Students lost: "+(int)(students*.01*difficulty));
         System.out.println("Points gained: "+(int)(students*5*difficulty));
         annoyancePoints += students * 5*difficulty;
-        totalMoney += students * 120;
+        totalMoney += (students * 120)/difficulty;
         students -= students*.01*difficulty;
     }
 }
