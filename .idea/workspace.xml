@@ -88,13 +88,20 @@
       <updated>1652284295429</updated>
     </task>
     <task id="LOCAL-00006" summary="Adds some content">
-      <created>1652309202241</created>
+      <created>1652288806782</created>
       <option name="number" value="00006" />
       <option name="presentableId" value="LOCAL-00006" />
       <option name="project" value="LOCAL" />
-      <updated>1652309202241</updated>
+      <updated>1652288806782</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Adds some content">
+      <created>1652360417884</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1652360417884</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
