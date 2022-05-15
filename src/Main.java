@@ -59,6 +59,9 @@ public class Main {
             int answer = 0;
             double randomVal = Math.random();
             double[] gameSelection = {Math.random()*8,Math.random()*8, Math.random()*8};
+            while((int)gameSelection[0] == (int)gameSelection[1] || (int)gameSelection[1] == (int)gameSelection[2] || (int)gameSelection[0] == (int)gameSelection[2]){
+                gameSelection = new double[]{Math.random() * 8, Math.random() * 8, Math.random() * 8};
+            }
             optionPrinter(randomVal, gameSelection);
 
             //makes sure input is valid(both it is an int, and it is one of the options generated above)
